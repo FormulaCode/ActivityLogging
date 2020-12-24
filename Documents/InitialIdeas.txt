@@ -1,0 +1,97 @@
+
+LIBRARY NAME
+------------------------
+Activity
+Event
+Log
+Tracing
+Audit
+Privacy
+User Activity Logging
+Activity Tracing
+
+
+ActivityTrace
+Act
+
+Formula.ActivityLog
+
+
+CUTE NAME
+-------------------------
+
+
+
+
+PACKAGE NAME
+-------------------------
+FormulaCode.ActivityLogging
+
+
+MODELS
+------------------------
+ActivityLogger
+IActivityLoggerProvider
+	- KafkaProvider
+	- AzureBlobProvider
+	- TextFileProvider
+	- JsonFileProvider
+	- DebugProvider
+	- AzureEventHub
+	- AzureCosmosDb
+	- 
+
+ActivityEntry
+
+- Entry
+- Activity
+
+
+PROPERTIES
+-------------------------
+- EntryId Unique
+
+- SessionId
+
+- AccountAlias (Login Name)
+- ActivityType
+- EventType
+
+
+- EntryDateTime
+- Timestamp
+
+
+- AppName
+- AppId
+- AppPublisher
+
+- DeviceName
+- DeviceId
+- DevicePlatform (Windows, iOS, Andriod)
+- DeviceAgent
+
+
+- LocationCoords
+- Location (City, State)
+
+
+
+
+- IpAddress
+- ClientAgent / 
+- Browser App
+
+
+- KeyValueData : KeyValuePair<string, string>
+- DebugData : string
+- AppData
+- AppDataLabel
+
+
+
+
+API example
+-----------------------
+devlopers.genesiscloud.com     good example of api schema
+
