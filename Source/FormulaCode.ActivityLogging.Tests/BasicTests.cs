@@ -23,6 +23,8 @@ namespace FormulaCode.ActivityLogging.Tests
 		{
 			_logger.Log(entry);
 		}
+
+
 	}
 
 
