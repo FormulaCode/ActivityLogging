@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/</PackageProjectUrl>
     <PackageTags>c# activity logging audit user login log</PackageTags>
     <PackageReleaseNotes>This is the initial development effort</PackageReleaseNotes>
+    <Version>1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
