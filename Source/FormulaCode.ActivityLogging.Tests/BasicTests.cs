@@ -8,8 +8,8 @@ using System.Diagnostics;
 
 namespace FormulaCode.ActivityLogging.Tests
 {
-
-
+	
+	// Example of App Specific Logger
 	public static class AppActivityLogger
 	{
 		private static ActivityLogger _logger;
@@ -24,11 +24,7 @@ namespace FormulaCode.ActivityLogging.Tests
 		{
 			_logger.Log(entry);
 		}
-
-
 	}
-
-
 
 	
 	public class BasicTests
@@ -36,49 +32,59 @@ namespace FormulaCode.ActivityLogging.Tests
 		[Fact]
 		public void BasicUsage()
 		{
-			
-		
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
+
 			ActivityLogger log = new ActivityLogger();
 			log.AddSink(new DebugSink());
-
-			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
 			log.Log(entry);
 		}
-
 
 		[Fact]
 		public void BasicUsage_UsingSink()
 		{
-			// Create / Setup Logger
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
+
+			// Create / Setup Logger / Log
 			ActivityLogger log = new ActivityLogger();
 			log.AddSink(new DebugSink());
-
-			// Build Entry
-			ActivityEntry entry = new ActivityEntry
-			{
-				ActivityType = DefaultActivityTypes.UserLogin,
-				DeviceIpAddress = "",
-				TimeStamp = DateTime.Now,
-				DeviceUserName = "Raiford",
-				DeviceAgent = "Shit Browser"
-			};
-
-			// Log
 			log.Log(entry);
 		}
+
+		[Fact]
+		public void BasicUsage_UsingActionSink()
+		{
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
+
+			Action<ActivityEntry> action = entry =>
+			{
+				string s = $"Action Generated: {entry.AccountName} {entry.TimeStamp.ToString()  }";
+				Debug.WriteLine(s);
+			};
+
+			IActivityLoggerSink sink = new ActionSink(action);
+
+
+			// Create / Setup Logger / Log
+			ActivityLogger log = new ActivityLogger();
+			log.AddSink(sink);
+			log.Log(entry);
+
+
+
+
+
+			// Add another sink
+			log.AddSink(new ActionSink(entry => Debug.WriteLine(entry.ToString())));
+			log.Log(entry);
+
+		}
+
 
 		[Fact]
 		public void BasicUsage_UsingWrapper()
 		{
 			// Build Entry
-			ActivityEntry entry = new ActivityEntry
-			{
-				ActivityType = DefaultActivityTypes.UserLogin,
-				DeviceIpAddress = "",
-				TimeStamp = DateTime.Now,
-				DeviceUserName = "Raiford",
-				DeviceAgent = "Shit Browser"
-			};
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
 
 			// Log
 			AppActivityLogger.Log(entry);
@@ -87,23 +93,12 @@ namespace FormulaCode.ActivityLogging.Tests
 		[Fact]
 		public void ActivityTest()
 		{
+			// Build Entry
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
+
 
 			Activity a = new Activity(nameof(ActivityTest));
-
 			a.Start();
-			
-
-			// Build Entry
-			ActivityEntry entry = new ActivityEntry
-			{
-				ActivityType = DefaultActivityTypes.UserLogin,
-				DeviceIpAddress = "",
-				TimeStamp = DateTime.Now,
-				DeviceUserName = "Raiford",
-				DeviceAgent = "Shit Browser"
-			};
-
-			// Log
 			AppActivityLogger.Log(entry);
 
 			a.Stop();
