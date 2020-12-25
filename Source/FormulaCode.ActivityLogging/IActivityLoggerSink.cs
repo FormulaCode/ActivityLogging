@@ -1,5 +1,4 @@
-﻿using FormulaCode.ActivityLogging.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 

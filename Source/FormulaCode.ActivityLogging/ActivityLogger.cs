@@ -1,5 +1,4 @@
-﻿using FormulaCode.ActivityLogging.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -20,8 +19,10 @@ namespace FormulaCode.ActivityLogging
 
 		public void Log(ActivityEntry entry)
 		{		
-			//if()
-
+			if(_sinks.Count<1)
+			{
+				Debug.WriteLine($"nameof(this) Does not have any Sinks assigned... there will be no Activities Logged");
+			}
 			foreach(var sink in _sinks)
 			{
 				sink.Log(entry);

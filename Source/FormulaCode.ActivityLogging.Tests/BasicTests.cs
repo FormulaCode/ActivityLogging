@@ -1,9 +1,10 @@
-using FormulaCode.ActivityLogging.Models;
 using FormulaCode.ActivityLogging.Utils;
 using FormulaCode.ActivityLogging;
 using System;
 using Xunit;
 using FormulaCode.ActivityLogging.Sinks;
+using FormulaCode.ActivityLogging.Tests.Utils;
+using System.Diagnostics;
 
 namespace FormulaCode.ActivityLogging.Tests
 {
@@ -35,18 +36,12 @@ namespace FormulaCode.ActivityLogging.Tests
 		[Fact]
 		public void BasicUsage()
 		{
-
+			
 		
 			ActivityLogger log = new ActivityLogger();
-			ActivityEntry entry = new ActivityEntry
-			{
-				ActivityType = DefaultActivityTypes.UserLogin,
-				DeviceIpAddress = "",
-				TimeStamp = DateTime.Now,
-				DeviceUserName = "Raiford",
-				DeviceAgent = "Shit Browser"
-			};
+			log.AddSink(new DebugSink());
 
+			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
 			log.Log(entry);
 		}
 
@@ -89,5 +84,30 @@ namespace FormulaCode.ActivityLogging.Tests
 			AppActivityLogger.Log(entry);
 		}
 
+		[Fact]
+		public void ActivityTest()
+		{
+
+			Activity a = new Activity(nameof(ActivityTest));
+
+			a.Start();
+			
+
+			// Build Entry
+			ActivityEntry entry = new ActivityEntry
+			{
+				ActivityType = DefaultActivityTypes.UserLogin,
+				DeviceIpAddress = "",
+				TimeStamp = DateTime.Now,
+				DeviceUserName = "Raiford",
+				DeviceAgent = "Shit Browser"
+			};
+
+			// Log
+			AppActivityLogger.Log(entry);
+
+			a.Stop();
+			string r = a.TraceStateString;
+		}
 	}
 }

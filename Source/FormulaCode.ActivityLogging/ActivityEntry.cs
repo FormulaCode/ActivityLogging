@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace FormulaCode.ActivityLogging.Models
+namespace FormulaCode.ActivityLogging
 {
 	public sealed class ActivityEntry
 	{
@@ -17,7 +17,7 @@ namespace FormulaCode.ActivityLogging.Models
 
 		// Person Info
 		public string AccountName { get; set; }
-		public string SessionId { get; set; }
+		public string DeviceSessionId { get; set; }
 
 		
 		// Organization Info   (Optional)
