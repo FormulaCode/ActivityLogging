@@ -95,6 +95,7 @@ namespace FormulaCode.ActivityLogging.Tests
 		{
 			// Build Entry
 			ActivityEntry entry = DataGenerator.CreateNewActivityEntry();
+			ActivityRecord actvity = null;
 
 
 			Activity a = new Activity(nameof(ActivityTest));
@@ -104,5 +105,24 @@ namespace FormulaCode.ActivityLogging.Tests
 			a.Stop();
 			string r = a.TraceStateString;
 		}
+
+
+		[Fact]
+		public void BuildEntry_BasicUsage()
+		{
+			object context = null;
+
+
+			//ActivityBuilder builder = new ActivityBuilder();
+			//builder.AddHttpContext(context);
+			//builder.AddServerInfo();
+			//builder.AddDeviceInfo();
+
+			//ActivityEntry entry = builder.BuildEntry();
+
+
+		}
+
+
 	}
 }

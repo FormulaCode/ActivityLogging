@@ -17,7 +17,6 @@ namespace FormulaCode.ActivityLogging
 
 		// Person Info
 		public string AccountName { get; set; }
-		public string DeviceSessionId { get; set; }
 
 		
 		// Organization Info   (Optional)
@@ -37,6 +36,8 @@ namespace FormulaCode.ActivityLogging
 		public string DeviceUserName { get; set; }
 		public string DevicePlatform { get; set; } // Windows 10
 		public string DeviceAgent { get; set; } // Chrome 8
+		public string DeviceSessionId { get; set; }
+
 
 
 		// Server / Machine  Info
@@ -64,6 +65,13 @@ namespace FormulaCode.ActivityLogging
 		{
 			string json = JsonSerializer.Serialize<ActivityEntry>(this, new JsonSerializerOptions() { WriteIndented = true });
 			return json;
+		}
+
+		public void CalculateChecksum()
+		{
+			// iterate the data values
+		
+			// Hash it and add it to the checksum property
 		}
 
 

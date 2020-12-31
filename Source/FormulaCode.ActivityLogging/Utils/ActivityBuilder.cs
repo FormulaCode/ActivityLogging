@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FormulaCode.ActivityLogging.Utils
 {
-	public sealed class ActivityEntryBuilder
+	public sealed class ActivityBuilder
 	{
 
 
